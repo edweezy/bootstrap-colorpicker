@@ -217,21 +217,28 @@
 		},
 		
 		hide: function(){
-			this.picker.hide();
+			//this.picker.hide();
+			$('.colorpicker').hide();
+
 			$(window).off('resize', this.place);
-			if (!this.isInput) {
+			
+			if( !this.isInput ){
 				$(document).off({
-					'mousedown': this.hide
+					'mousedown': function(){
+						$('.colorpicker').hide();
+					}
 				});
 				if (this.component){
 					this.element.find('input').prop('value', this.format.call(this));
 				}
 				this.element.data('color', this.format.call(this));
-			} else {
+			} 
+			
+			else {
 				this.element.prop('value', this.format.call(this));
 			}
 			this.element.trigger({
-				type: 'hide',
+				type: 'changeColor',
 				color: this.color
 			});
 		},
